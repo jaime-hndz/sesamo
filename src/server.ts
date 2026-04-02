@@ -1,12 +1,12 @@
+import "dotenv/config"
 import express from "express"
+import authRoutes from "./interfaces/routes/auth.routes"
 
 const app = express()
 
 app.use(express.json())
 
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" })
-})
+app.use("/auth", authRoutes)
 
 const PORT = 3000
 
