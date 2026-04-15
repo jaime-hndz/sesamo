@@ -1,6 +1,7 @@
 
 import { Request, Response } from "express"
 import { registerUser } from "../../application/use-cases/register-user.usecase"
+import { AppError } from "../../errors/AppError";
 
 export const registerController = async (req: Request, res: Response) => {
   try {
@@ -13,8 +14,9 @@ export const registerController = async (req: Request, res: Response) => {
       email: user.email
     })
   } catch (error: any) {
-    res.status(400).json({
-      error: error.message
-    })
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({ error: error.message })
+    }
+    res.status(500).json({ error: "Internal server error" })
   }
 }
