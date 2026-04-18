@@ -49,3 +49,15 @@ export const refreshController = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal server error" })
   }
 }
+
+export const logoutController = async (req: Request, res: Response) => {
+  try {
+    await logoutUser(req.body)
+    res.status(204).send() // 204 = No Content — éxito sin cuerpo
+  } catch (error) {
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({ error: error.message })
+    }
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
