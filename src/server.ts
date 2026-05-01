@@ -4,12 +4,16 @@ import authRoutes from "./interfaces/routes/auth.routes"
 import { apiReference } from "@scalar/express-api-reference"
 import { openApiSpec } from "./docs/openapi"
 import { errorHandler } from "./interfaces/middleware/error-handler"
+import userRoutes from "./interfaces/routes/user.routes"
 
 const app = express()
 
 app.use(express.json())
 
 app.use("/auth", authRoutes)
+
+
+app.use("/user", userRoutes)
 
 const PORT = 3000
 

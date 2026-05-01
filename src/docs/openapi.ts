@@ -138,5 +138,35 @@ export const openApiSpec = {
         },
       },
     },
+    "/user/me": {
+      get: {
+        tags: ["User"],
+        summary: "Get current authenticated user",
+        security: [{ bearerAuth: [] }],
+        responses: {
+          200: {
+            description: "Returns the authenticated user payload",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    message: { type: "string" },
+                    user: {
+                      type: "object",
+                      properties: {
+                        sub: { type: "string" },
+                        email: { type: "string" },
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          401: { description: "Invalid or missing token" }
+        }
+      }
+    }
   },
 }
