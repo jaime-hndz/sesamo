@@ -16,13 +16,15 @@ app.get("/openapi.json", (req, res) => {
   res.json(openApiSpec)
 })
 
+app.use(express.static('public'))
+
 app.use(
   "/docs",
   apiReference({
-    theme: "laserwave",        // opciones: default, moon, purple, solarized, bluePlanet, saturn, kepler, mars, deepSpace
+    theme: "moon",     
     url: "/openapi.json",
     pageTitle: "Sésamo API Docs",
-    // favicon: "/public/logo.png",
+    favicon: '/logo.png'
   })
 )
 
