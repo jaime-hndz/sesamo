@@ -1,10 +1,10 @@
 
 import { Request, Response } from "express"
-import { registerUser } from "../../application/use-cases/register-user.usecase"
-import { AppError } from "../../errors/AppError";
-import { loginUser } from "../../application/use-cases/login-user.usecase"
-import { refreshToken } from "../../application/use-cases/refresh-token.usecase"
-import { logoutUser } from "../../application/use-cases/logout-user.usecase"
+import { registerUser } from "@/application/use-cases/register-user.usecase"
+import { AppError } from "@/errors/AppError";
+import { loginUser } from "@/application/use-cases/login-user.usecase"
+import { refreshToken } from "@/application/use-cases/refresh-token.usecase"
+import { logoutUser } from "@/application/use-cases/logout-user.usecase"
 
 export const registerController = async (req: Request, res: Response) => {
   try {

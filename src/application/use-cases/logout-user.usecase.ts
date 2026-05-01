@@ -1,5 +1,5 @@
-import { AppError } from "../../errors/AppError"
-import { findSessionByToken, revokeSession } from "../../infrastructure/repositories/session.repository"
+import { AppError } from "@/errors/AppError"
+import { findSessionByToken, revokeSession } from "@/infrastructure/repositories/session.repository"
 
 export const logoutUser = async (input: unknown) => {
   if (!input || typeof input !== "object" || !("refreshToken" in input)) {

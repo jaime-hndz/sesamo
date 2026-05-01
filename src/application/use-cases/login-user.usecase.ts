@@ -1,9 +1,9 @@
 import { z } from "zod"
-import { AppError } from "../../errors/AppError"
-import { findUserByEmail } from "../../infrastructure/repositories/user.repository"
-import { createSession } from "../../infrastructure/repositories/session.repository"
-import { comparePassword } from "../../utils/hash"
-import { generateAccessToken } from "../../utils/jwt"
+import { AppError } from "@/errors/AppError"
+import { findUserByEmail } from "@/infrastructure/repositories/user.repository"
+import { createSession } from "@/infrastructure/repositories/session.repository"
+import { comparePassword } from "@/utils/hash"
+import { generateAccessToken } from "@/utils/jwt"
 
 const loginSchema = z.object({
   email: z.string().email(),

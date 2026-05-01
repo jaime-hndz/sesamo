@@ -1,7 +1,7 @@
-import { AppError } from "../../errors/AppError"
-import { findSessionByToken, revokeSession, createSession } from "../../infrastructure/repositories/session.repository"
-import { findUserById } from "../../infrastructure/repositories/user.repository"
-import { generateAccessToken } from "../../utils/jwt"
+import { AppError } from "@/errors/AppError"
+import { findSessionByToken, revokeSession, createSession } from "@/infrastructure/repositories/session.repository"
+import { findUserById } from "@/infrastructure/repositories/user.repository"
+import { generateAccessToken } from "@/utils/jwt"
 
 export const refreshToken = async (input: unknown) => {
   if (!input || typeof input !== "object" || !("refreshToken" in input)) {
