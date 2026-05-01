@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { AppError } from "@/errors/AppError"
+import { AppError } from "@/core/errors/AppError"
 import { findUserByEmail } from "@/infrastructure/repositories/user.repository"
 import { createSession } from "@/infrastructure/repositories/session.repository"
 import { comparePassword } from "@/utils/hash"

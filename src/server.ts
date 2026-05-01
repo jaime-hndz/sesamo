@@ -3,6 +3,7 @@ import express from "express"
 import authRoutes from "./interfaces/routes/auth.routes"
 import { apiReference } from "@scalar/express-api-reference"
 import { openApiSpec } from "./docs/openapi"
+import { errorHandler } from "./interfaces/middleware/error-handler"
 
 const app = express()
 
@@ -27,6 +28,8 @@ app.use(
     favicon: '/logo.png'
   })
 )
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

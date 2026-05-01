@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { hashPassword } from "@/utils/hash"
 import { createUser, findUserByEmail } from "@/infrastructure/repositories/user.repository"
-import { AppError } from "@/errors/AppError"
+import { AppError } from "@/core/errors/AppError"
 
 const registerSchema = z.object({
   email: z.email(),

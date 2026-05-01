@@ -1,4 +1,4 @@
-import { AppError } from "@/errors/AppError"
+import { AppError } from "@/core/errors/AppError"
 import { findSessionByToken, revokeSession } from "@/infrastructure/repositories/session.repository"
 
 export const logoutUser = async (input: unknown) => {

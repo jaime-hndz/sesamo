@@ -1,4 +1,4 @@
-import { AppError } from "@/errors/AppError"
+import { AppError } from "@/core/errors/AppError"
 import { findSessionByToken, revokeSession, createSession } from "@/infrastructure/repositories/session.repository"
 import { findUserById } from "@/infrastructure/repositories/user.repository"
 import { generateAccessToken } from "@/utils/jwt"

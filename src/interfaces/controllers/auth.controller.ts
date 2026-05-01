@@ -1,12 +1,13 @@
 
 import { Request, Response } from "express"
 import { registerUser } from "@/application/use-cases/register-user.usecase"
-import { AppError } from "@/errors/AppError";
+import { AppError } from "@/core/errors/AppError";
 import { loginUser } from "@/application/use-cases/login-user.usecase"
 import { refreshToken } from "@/application/use-cases/refresh-token.usecase"
 import { logoutUser } from "@/application/use-cases/logout-user.usecase"
+import { NextFunction } from "express"
 
-export const registerController = async (req: Request, res: Response) => {
+export const registerController = async (req: Request, res: Response, next: NextFunction) => {
   try {
 
     console.log("Registering user with data:", req.body);
@@ -17,47 +18,35 @@ export const registerController = async (req: Request, res: Response) => {
       email: user.email
     })
   } catch (error: any) {
-    if (error instanceof AppError) {
-      return res.status(error.statusCode).json({ error: error.message })
-    }
-    res.status(500).json({ error: "Internal server error" })
+    next(error)
   }
 }
 
-export const loginController = async (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { accessToken, refreshToken } = await loginUser(req.body)
 
     res.status(200).json({ accessToken, refreshToken })
   } catch (error) {
-    if (error instanceof AppError) {
-      return res.status(error.statusCode).json({ error: error.message })
-    }
-    res.status(500).json({ error: "Internal server error" })
+    next(error) 
   }
 }
 
 
-export const refreshController = async (req: Request, res: Response) => {
+export const refreshController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const tokens = await refreshToken(req.body)
     res.status(200).json(tokens)
   } catch (error) {
-    if (error instanceof AppError) {
-      return res.status(error.statusCode).json({ error: error.message })
-    }
-    res.status(500).json({ error: "Internal server error" })
+    next(error)
   }
 }
 
-export const logoutController = async (req: Request, res: Response) => {
+export const logoutController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await logoutUser(req.body)
     res.status(204).send() // 204 = No Content — éxito sin cuerpo
   } catch (error) {
-    if (error instanceof AppError) {
-      return res.status(error.statusCode).json({ error: error.message })
-    }
-    res.status(500).json({ error: "Internal server error" })
+    next(error)
   }
 }
