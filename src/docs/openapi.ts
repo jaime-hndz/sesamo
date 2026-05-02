@@ -138,6 +138,47 @@ export const openApiSpec = {
         },
       },
     },
+    "/auth/firebase": {
+      post: {
+        tags: ["Auth"],
+        summary: "Login with Firebase ID token",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                required: ["idToken"],
+                properties: {
+                  idToken: {
+                    type: "string",
+                    example: "eyJhbGciOiJSUzI1NiIs...",
+                    description: "Firebase ID token obtained from client SDK"
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: "Returns your own accessToken and refreshToken",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    accessToken: { type: "string" },
+                    refreshToken: { type: "string" }
+                  }
+                }
+              }
+            }
+          },
+          401: { description: "Invalid Firebase token" }
+        }
+      }
+    },
     "/user/me": {
       get: {
         tags: ["User"],
@@ -167,6 +208,7 @@ export const openApiSpec = {
           401: { description: "Invalid or missing token" }
         }
       }
-    }
+    },
+
   },
 }
